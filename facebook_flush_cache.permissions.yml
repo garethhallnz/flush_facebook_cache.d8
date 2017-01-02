@@ -1,0 +1,4 @@
+can flush facebook cache:
+  description: ''
+  title: 'Can flush facebook cache'
+  restrict access: TRUE
