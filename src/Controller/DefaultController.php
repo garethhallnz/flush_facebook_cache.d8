@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\facebook_flush_cache\FacebookFlushCacheService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Default controller for the simple_currency_converter module.
@@ -32,7 +33,14 @@ class DefaultController extends ControllerBase {
       return new RedirectResponse($url);
     }
 
-//    drupal_set_message(t("Could not determine the url to clear Facebook's cache."), 'warning');
+    $notFoundUrl = \Drupal::config('system.site')->get('page.404');
+
+    if (!empty($notFoundUrl)) {
+      return new RedirectResponse($notFoundUrl);
+    }
+
+    return new Response(t('Url was not found or is invalid'), 404);
+
   }
 
 }
