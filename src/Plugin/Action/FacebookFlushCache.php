@@ -23,6 +23,7 @@ class FacebookFlushCache extends ActionBase {
    */
   public function execute($entity = NULL) {
 
+    /* @var $entity \Drupal\Core\Entity\Entity */
     $url = Url::fromRoute('entity.node.canonical', ['node' => $entity->id()], ['absolute' => TRUE]);
 
     $service = new FacebookFlushCacheService();

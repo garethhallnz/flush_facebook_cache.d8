@@ -13,11 +13,15 @@ class FacebookFlushCacheService {
 
   /**
    * The base url.
+   *
+   * @var string
    */
   public $facebookUrl = 'https://graph.facebook.com';
 
   /**
    * Provides HTTP client service.
+   *
+   * @var \GuzzleHttp\Client
    */
   protected $httpClient;
 
