@@ -1,8 +1,10 @@
-facebook_flush_cache.flush:
-  path: '/facebook_flush_cache/{nid}'
+entity.node.facebook_flush_cache.content:
+  path: '/node/{node}/facebook_flush_cache'
   defaults:
-    _controller: '\Drupal\facebook_flush_cache\Controller\DefaultController::execute'
     _title: 'Clear facebook cache'
+    _controller: '\Drupal\facebook_flush_cache\Controller\DefaultController::execute'
   requirements:
-    _permission: 'can flush facebook cache'
-    nid: \d+
+    _permission: 'flush facebook cache'
+    node: \d+
+  options:
+      _node_operation_route: TRUE

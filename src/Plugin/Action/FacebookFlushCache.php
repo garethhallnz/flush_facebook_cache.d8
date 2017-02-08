@@ -36,7 +36,7 @@ class FacebookFlushCache extends ActionBase {
    */
   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
     $access = $object->access('update', $account, TRUE)
-      ->allowedIf($account->hasPermission('can flush facebook cache'));
+      ->allowedIf($account->hasPermission('flush facebook cache'));
     return $return_as_object ? $access : $access->isAllowed();
   }
 

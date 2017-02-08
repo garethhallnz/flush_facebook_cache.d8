@@ -15,9 +15,9 @@ class DefaultController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function execute($nid) {
+  public function execute($node) {
 
-    $url = Url::fromRoute('entity.node.canonical', ['node' => $nid], ['absolute' => TRUE]);
+    $url = Url::fromRoute('entity.node.canonical', ['node' => $node], ['absolute' => TRUE]);
 
     if ($url) {
 
@@ -27,10 +27,12 @@ class DefaultController extends ControllerBase {
 
       $service->execute($url);
 
+      drupal_set_message(t("Facebook's cache has been cleared"));
+
       return new RedirectResponse($url);
     }
 
-    // @todo Need to return a Response
+//    drupal_set_message(t("Could not determine the url to clear Facebook's cache."), 'warning');
   }
 
 }
