@@ -2,7 +2,9 @@
 
 namespace Drupal\facebook_flush_cache;
 
+use Drupal\Component\Serialization\Json;
 use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\MessageInterface;
 
 /**
  * Class FacebookService.
@@ -43,7 +45,7 @@ class FacebookFlushCacheService {
 
       $request = $this->httpClient->get($url);
 
-      $this->log($request->getBody());
+      $this->log($request);
 
     }
     catch (RequestException $error) {
@@ -53,24 +55,24 @@ class FacebookFlushCacheService {
   }
 
   /**
-   * Log successful .
+   * Log successful.
    */
-  public function log($data) {
-  //    watchdog(
-//      'Facebook cache',
-//      'Flush FB Node: @nid <pre>@data<pre>',
-//      array('@nid' => $node->nid, '@data' => print_r($response, TRUE))
-//    );
+  public function log(MessageInterface $request) {
+
+    $data = $request->getBody()->getContents();
+
+    $data = Json::decode($data);
+
+    \Drupal::logger('facebook_flush_cache')
+      ->info("Cache cleared for @url", ['@url' => $data['id']]);
   }
 
   /**
    * Log Error.
    */
-  public function logError($error) {
-    //    watchdog(
-//      'Facebook cache',
-//      'Flush FB Node: @nid <pre>@data<pre>',
-//      array('@nid' => $node->nid, '@data' => print_r($response, TRUE))
-//    );
+  public function logError(RequestException $error) {
+    \Drupal::logger('facebook_flush_cache')
+      ->error($error->getMessage());
   }
+
 }
