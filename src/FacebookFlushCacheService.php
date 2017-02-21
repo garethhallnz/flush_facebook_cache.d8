@@ -3,8 +3,10 @@
 namespace Drupal\facebook_flush_cache;
 
 use Drupal\Component\Serialization\Json;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\MessageInterface;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Class FacebookService.
@@ -28,10 +30,18 @@ class FacebookFlushCacheService {
   protected $httpClient;
 
   /**
+   * Provides logger service.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
    * Constructs a new object.
    */
-  public function __construct() {
-    $this->httpClient = $client = \Drupal::httpClient();
+  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger) {
+    $this->httpClient = $http_client;
+    $this->logger = $logger;
   }
 
   /**
@@ -41,7 +51,7 @@ class FacebookFlushCacheService {
 
     try {
 
-      $url = $this->facebookUrl . '/?id=' . $uri . '&scrape=true';
+      $url = $this->buildUrl($uri);
 
       $request = $this->httpClient->get($url);
 
@@ -52,6 +62,16 @@ class FacebookFlushCacheService {
       $this->logError($error);
     }
 
+  }
+
+  /**
+   * Build the url to flush.
+   */
+  public function buildUrl($uri) {
+
+    $query = ['id' => $uri, 'scrape' => 'true'];
+
+    return sprintf('%s/?%s', $this->facebookUrl, http_build_query($query));
   }
 
   /**
