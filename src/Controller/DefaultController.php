@@ -48,7 +48,7 @@ class DefaultController extends ControllerBase {
 
       $url = $url->toString();
 
-      $this->facebookCacheService->execute($url);
+      $this->facebookCacheService->clearCache($url);
 
       drupal_set_message(t("Facebook's cache has been cleared"));
 

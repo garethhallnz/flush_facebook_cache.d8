@@ -46,9 +46,9 @@ class FacebookFlushCacheService {
   }
 
   /**
-   * Clear make request to clear cache.
+   * Make request to clear cache.
    */
-  public function execute($uri) {
+  public function clearCache($uri) {
 
     try {
 

@@ -109,11 +109,11 @@ class ServiceTest extends UnitTestCase {
   public function testExecute() {
 
     $this->facebookMock->expects($this->any())
-      ->method('execute')
+      ->method('clearCache')
       ->with('foo')
       ->willReturn(TRUE);
 
-    $this->assertTrue($this->facebookMock->execute('foo'));
+    $this->assertTrue($this->facebookMock->clearCache('foo'));
 
   }
 

@@ -36,7 +36,7 @@ class FacebookFlushCache extends ActionBase {
 
       $url = $url->toString();
 
-      $this->facebookCacheService->execute($url);
+      $this->facebookCacheService->clearCache($url);
     }
   }
 
