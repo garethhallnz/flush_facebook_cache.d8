@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\facebook_flush_cache\Unit;
+namespace Drupal\facebook_flush_cache\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -9,11 +9,11 @@ use GuzzleHttp\ClientInterface;
 use Drupal\facebook_flush_cache\FacebookFlushCacheService;
 use Eris\Generator;
 use Eris\TestTrait;
-use Psr\Log\LoggerInterface;
 
 /**
  * @coversDefaultClass \Drupal\facebook_flush_cache\FacebookFlushCacheService
- * @group facebook_flush_cache_unit
+ *
+ * @group facebook_flush_cache
  */
 class ServiceTest extends UnitTestCase {
 

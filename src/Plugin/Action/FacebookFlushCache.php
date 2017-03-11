@@ -6,6 +6,7 @@ use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\facebook_flush_cache\FacebookFlushCacheService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Flush Facebook cache for given node and its url.
@@ -19,24 +20,19 @@ use Drupal\facebook_flush_cache\FacebookFlushCacheService;
 class FacebookFlushCache extends ActionBase {
 
   /**
-   * FacebookFlushCacheService.
-   *
-   * @var \Drupal\facebook_flush_cache\FacebookFlushCacheService
-   */
-  protected $facebookCacheService;
-
-  /**
    * {@inheritdoc}
    */
-  public function execute($node) {
+  public function execute($node = NULL) {
 
-    $url = Url::fromRoute('entity.node.canonical', ['node' => $node], ['absolute' => TRUE]);
+    $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE]);
 
     if ($url) {
 
       $url = $url->toString();
 
-      $this->facebookCacheService->clearCache($url);
+      $facebookCacheService = \Drupal::service('facebook_flush_cache.service');
+
+      $facebookCacheService->clearCache($url);
     }
   }
 
@@ -47,15 +43,6 @@ class FacebookFlushCache extends ActionBase {
     $access = $object->access('update', $account, TRUE)
       ->allowedIf($account->hasPermission('flush facebook cache'));
     return $return_as_object ? $access : $access->isAllowed();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('facebook_flush_cache.service')
-    );
   }
 
 }
