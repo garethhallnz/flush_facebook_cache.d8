@@ -7,6 +7,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\MessageInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class FacebookService.
@@ -32,7 +33,7 @@ class FacebookFlushCacheService {
   /**
    * Provides logger service.
    *
-   * @var \Psr\Log\LoggerInterface
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
    */
   protected $logger;
 
@@ -57,9 +58,13 @@ class FacebookFlushCacheService {
 
       $this->log($request);
 
+      return TRUE;
+
     }
     catch (RequestException $error) {
       $this->logError($error);
+
+      return FALSE;
     }
 
   }
