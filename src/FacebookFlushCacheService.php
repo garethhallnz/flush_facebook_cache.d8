@@ -54,7 +54,7 @@ class FacebookFlushCacheService {
 
       $url = $this->buildUrl($uri);
 
-      $request = $this->httpClient->get($url);
+      $request = $this->httpClient->post($url);
 
       $this->log($request);
 
