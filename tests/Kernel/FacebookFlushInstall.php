@@ -5,7 +5,9 @@ namespace Drupal\facebook_flush_cache\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * @group facebook_flush_cache
+ * Install the module.
+ *
+ * @group facebook_flush_cache_kernel
  */
 class FacebookFlushInstall extends KernelTestBase {
 
@@ -25,7 +27,3 @@ class FacebookFlushInstall extends KernelTestBase {
   }
 
 }
-
-
-
-

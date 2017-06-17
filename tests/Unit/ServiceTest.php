@@ -13,7 +13,7 @@ use Eris\TestTrait;
 /**
  * @coversDefaultClass \Drupal\facebook_flush_cache\FacebookFlushCacheService
  *
- * @group facebook_flush_cache
+ * @group facebook_flush_cache_unit
  */
 class ServiceTest extends UnitTestCase {
 
