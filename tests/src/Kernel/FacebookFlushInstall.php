@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\facebook_flush_cache\Kernel;
+namespace Drupal\Tests\facebook_flush_cache\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 

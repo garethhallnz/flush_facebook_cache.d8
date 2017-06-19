@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\facebook_flush_cache\Unit;
+namespace Drupal\Tests\facebook_flush_cache\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
